@@ -3,7 +3,7 @@ div{
 }
 
 div canvas{
-    background-color:lightgrey;
+    /*background-color:lightgrey;*/
     border:1px solid;
 }
 div form{
