@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bomber</title>
+</head>
+<body>
+	<h1>BomberMan</h1>
+	<div>
+		<canvas width="800" height="800"></canvas>
+	</div>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+	<script type="text/javascript">
+		var socket = io.connect();
+
+		socket.on('connect', function () {
+          socket.emit("FirstMessage","Salut Antoine");
+        });
+
+	</script>
+
+</body>
+</html>
