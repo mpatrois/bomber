@@ -23,10 +23,12 @@ var nbPlayers=0;
 var socketsHosts = [];
 var socketsPlayers = [];
 
+var idPlay = 1;
+
 function getPlayers(){
   var players = [];
   for (var i = 0; i < socketsPlayers.length; i++) {
-      players.push({id:socketsPlayers[i].id,data:socketsPlayers.__player});
+      players.push(socketsPlayers[i].__player);
   }
   return players;
 };
@@ -45,13 +47,16 @@ io.on('connection', function (socket) {
    
       socket.on('connect_host', function () {      
         socketsHosts.push(socket);
+        console.log(getPlayers());
         io.sockets.emit('welcome_host',getPlayers());
       });
 
       socket.on('connect_player', function () {      
         socketsPlayers.push(socket);
         socket.__player = {};
-        io.sockets.emit('new_player',socket.id);
+        socket.__player.id   = socket.id;
+        socket.__player.name = "Player n° " + (idPlay++);
+        io.sockets.emit('new_player',socket.__player);
       });
 
 
@@ -64,6 +69,7 @@ io.on('connection', function (socket) {
 
       socket.on('send_player_name', function (name) {
       	socket.__player.name = name;
+        io.sockets.emit('update_player',socket.__player);
       });
 
       socket.on('send_player_dir', function (data) {

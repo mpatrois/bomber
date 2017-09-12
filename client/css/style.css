@@ -20,3 +20,7 @@ div form h2{
     text-align: center;
     margin-top:0;
 }
+
+#map-canvas,#table-players{
+    float: left;
+}

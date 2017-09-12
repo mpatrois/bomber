@@ -7,7 +7,7 @@
 <body>
 	<h1>BomberMan</h1>
 	<div>
-		<canvas width="800" height="800"></canvas>
+		<!-- <canvas width="800" height="800"></canvas> -->
 	
 	<form id="form">
         <h2> Paramétrages </h2>
@@ -26,7 +26,6 @@
 
         document.onsubmit = function (event){
             event.preventDefault();
-            
             var namePlayer = document.getElementById("name").value;
             socket.emit("send_player_name",namePlayer);
             return false;

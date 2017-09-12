@@ -19,6 +19,22 @@
 
         var players = [];
 
+        var app4 = new Vue({
+          el: '#table-players',
+          data: {
+            players: players
+          }, 
+          methods: {
+            playersChanged: function(players) {
+                // console.log(this.players);
+                // console.log(this.players);
+                this.players = players;
+              // Vue.set(this.players,players);
+              // alert(this.numbers[1]);
+            }
+          }
+        })
+
         // player = new Player(map);
         
         players = [];
@@ -89,25 +105,40 @@
         });
 
         socket.on('welcome_host', function (allPlayers) {
-            players = {};
+            players = [];
             for (var i = 0; i < allPlayers.length; i++) {
                 var newPlayer = new Player(map);
-                // newPlayer.setCase(1,1);
-                
-                players[allPlayers[i].id] = newPlayer;
+                newPlayer.id = allPlayers[i].id
+                newPlayer.name = allPlayers[i].name
 
+                players.push(newPlayer);
             }
-
-            console.log(players);
+            app4.playersChanged(players);
         });
 
-        socket.on('new_player', function (newPlayerId) {
+        socket.on('new_player', function (newPlay) {
+            console.log(newPlay);
+            console.log(players);
 
             var newPlayer = new Player(map);
-            // newPlayer.setCase(1,1);
-            players[newPlayerId] = newPlayer;
-            console.log(players);
+                newPlayer.id = newPlay.id
+                newPlayer.name = newPlay.name
+
+            players.push(newPlayer);
+
+            app4.playersChanged(players);
+        }); 
+
+        socket.on('update_player', function (play) {
+            for (var i = 0; i < players.length; i++) {
+                if(players[i].id == play.id){
+                    players[i].name = play.name;
+                }
+            }
+            app4.playersChanged(players);
         });
+
+        
 
 
 
