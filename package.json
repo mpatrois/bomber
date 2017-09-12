@@ -1,0 +1,13 @@
+{
+  "name": "express-html",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "DEBUG=express:* node server.js"
+  },
+  "dependencies": {
+    "express": "^4.11.0",
+    "async": "^2.5.0",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {}
+}
