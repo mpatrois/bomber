@@ -1,7 +1,4 @@
-
-window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||  window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-
-var canvas=document.getElementById("map");
+var canvas = document.getElementById("map");
 
 canvas.width=800;
 canvas.height=500;
@@ -22,34 +19,31 @@ var bricks = [];
 
 Bombe.size = Player.size = 20;
 
-var nbColumn = 20;
-var nbRow = 20;
-
-
-
-// bricks.push(new Brick(1*Player.size,5*Player.size));
-// bricks.push(new Brick(2*Player.size,2*Player.size));
-// bricks.push(new Brick(3*Player.size,8*Player.size));
-// bricks.push(new Brick(4*Player.size,2*Player.size));
+canvas.width =  MAP_ORIGINAL[0].length * Player.size;
+canvas.height =   MAP_ORIGINAL.length* Player.size; 
 
 playerOne.color = "red";
 
-canvas.width = Player.size * nbColumn;
-canvas.height = Player.size * nbRow;
+// canvas.width = Player.size * nbColumn;
+// canvas.height = Player.size * nbRow;
 
 map  = new Map(Player.size);
 
+user = new User(map);
 
 function update(){
     for (i=0; i < players.length; i++){
         players[i].move();
     }
+    user.move();
 }
 
 function render(){
     context.clearRect(0,0,canvas.width,canvas.height);
 
     map.draw(context);
+
+    user.draw(context);
     
     for (i=0; i < players.length; i++){
         players[i].draw(context);
@@ -59,11 +53,13 @@ function render(){
     }
 }
 
-function frame() {
+function mainLoop() {
     update();
     render();
-    requestAnimationFrame(frame); // request the next frame
+    // requestAnimationFrame(frame); // request the next frame
 }
+
+window.setInterval(mainLoop, 1000 / Pacman.FPS);
 
 document.onkeydown = function(event) {
 
@@ -84,6 +80,3 @@ document.onkeydown = function(event) {
         playerOne.dropBomb(bombs);
     }
 }
-
-frame();
-

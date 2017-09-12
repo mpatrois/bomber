@@ -72,8 +72,7 @@ function Player(x, y) {
 
 }
 
-
-var Playerf = function (game, map) {
+function User (map) {
     
     var position  = null,
         direction = null,
@@ -140,6 +139,8 @@ var Playerf = function (game, map) {
         return true;
 	};
 
+	document.addEventListener("keydown", keyDown, true);
+
     function getNewCoord(dir, current) {   
         return {
             "x": current.x + (dir === LEFT && -2 || dir === RIGHT && 2 || 0),
@@ -184,7 +185,7 @@ var Playerf = function (game, map) {
              (dir === UP || dir === DOWN));
     };
 
-    function move(ctx) {
+    function move() {
         
         var npos        = null, 
             nextWhole   = null, 
@@ -228,21 +229,21 @@ var Playerf = function (game, map) {
         
         block = map.block(nextWhole);        
         
-        if ((isMidSquare(position.y) || isMidSquare(position.x)) &&
-            block === Pacman.BISCUIT || block === Pacman.PILL) {
+        // if ((isMidSquare(position.y) || isMidSquare(position.x)) &&
+        //     block === Pacman.BISCUIT || block === Pacman.PILL) {
             
-            map.setBlock(nextWhole, Pacman.EMPTY);           
-            addScore((block === Pacman.BISCUIT) ? 10 : 50);
-            eaten += 1;
+        //     map.setBlock(nextWhole, Pacman.EMPTY);           
+        //     addScore((block === Pacman.BISCUIT) ? 10 : 50);
+        //     eaten += 1;
             
-            if (eaten === 182) {
-                game.completedLevel();
-            }
+        //     // if (eaten === 182) {
+        //     //     game.completedLevel();
+        //     // }
             
-            if (block === Pacman.PILL) { 
-                game.eatenPill();
-            }
-        }   
+        //     // if (block === Pacman.PILL) { 
+        //     //     game.eatenPill();
+        //     // }
+        // }   
                 
         return {
             "new" : position,
@@ -255,90 +256,14 @@ var Playerf = function (game, map) {
         return rem > 3 || rem < 7;
     };
 
-    function calcAngle(dir, pos) { 
-        if (dir == RIGHT && (pos.x % 15 < 7)) {
-            return {"start":0.25, "end":1.75, "direction": false};
-        } else if (dir === DOWN && (pos.y % 15 < 7)) { 
-            return {"start":0.75, "end":2.25, "direction": false};
-        } else if (dir === UP && (pos.y % 15 < 7)) { 
-            return {"start":1.25, "end":1.75, "direction": true};
-        } else if (dir === LEFT && (pos.x % 15 < 7)) {             
-            return {"start":0.75, "end":1.25, "direction": true};
-        }
-        return {"start":0, "end":2, "direction": false};
-    };
-
-    function drawDead(ctx, amount) { 
-
-        var size = map.blockSize, 
-            half = size / 2;
-
-        if (amount >= 1) { 
-            return;
-        }
-
-        ctx.fillStyle = color;
-        ctx.beginPath();        
-        ctx.moveTo(((position.x/10) * size) + half, 
-                   ((position.y/10) * size) + half);
-        
-        ctx.arc(((position.x/10) * size) + half, 
-                ((position.y/10) * size) + half,
-                half, 0, Math.PI * 2 * amount, true); 
-
-        //ctx.drawImage(image.getImage('craby'), 4, 323, 34, 28, ((position.x/10) * size) - 32/4 , ((position.y/10) * size), 32, 21);
-        
-        ctx.fill();    
-    };
 
     function draw(ctx,image) { 
 
-        var s     = map.blockSize, 
-            angle = calcAngle(direction, position);
+        var s     = map.blockSize;
 
         ctx.fillStyle = color;
 
-        var crabyRectAnim = {x:154,y:291,w:32,h:22}
-
-        
-        console.log(position.x);
-        console.log((position.x/10) * s);
-
-        if(angle.start==0.25)
-            crabyRectAnim = {x:186,y:291,w:30,h:22}
-        else if(angle.start == 0.75 || angle.start == 1.25 )
-            crabyRectAnim = {x:216,y:291,w:32,h:22}
-
-
-        // console.log(position.x);
-        // console.log(position.x/10);
-        // console.log((position.x/10)*s);
-
-
-        // ctx.fillRect(((position.x/10) * s) - 32/4 , ((position.y/10) * s), 32, 21);
-        // ctx.drawImage(image.getImage('craby'), crabyRectAnim.x, crabyRectAnim.y, crabyRectAnim.w, crabyRectAnim.h, ((position.x/10) * s) - 32/4 , ((position.y/10) * s), 32, 21);
-
-        // console.log(angle);
-
-        //ctx.beginPath();        
-
-        ctx.moveTo(((position.x/10) * s) + s / 2,
-                   ((position.y/10) * s) + s / 2);
-        
-        ctx.arc(((position.x/10) * s) + s / 2,
-                ((position.y/10) * s) + s / 2,
-                s / 2, 
-                Math.PI * angle.start, 
-                Math.PI * angle.end, 
-                angle.direction); 
-        
-        
-
-
-
-        ctx.fill();
-
-
+        ctx.fillRect( (position.x/10) * s,(position.y/10) * s,s,s);
 
     };
 
@@ -348,7 +273,7 @@ var Playerf = function (game, map) {
 
     return {
         "draw"          : draw,
-        "drawDead"      : drawDead,
+        // "drawDead"      : drawDead,
         "loseLife"      : loseLife,
         "getLives"      : getLives,
         "score"         : score,
