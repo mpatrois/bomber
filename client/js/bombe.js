@@ -1,6 +1,3 @@
-var canvas=document.getElementById("map");
-context = this.canvas.getContext("2d");
-
 
 function Bombe(x,y,time) {
     this.x = x;

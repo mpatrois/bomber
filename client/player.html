@@ -15,29 +15,20 @@
 	    <input id="name" type="text" name="PlayerName"> 
     </form>
 	</div>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+	<script type="text/javascript" src="js/socket.io.js"></script>
 
 	<script type="text/javascript">
 		var socket = io.connect();
-        
-        var myPlayer = {
-            id:0,
-            name:"Thomas"
-        }
 
 		socket.on('connect', function () {
-            myPlayer.id = socket.id;
-            socket.emit("my_name",myPlayer);
+            socket.emit("connect_player");
         });
-        
-         console.log("test1");
+
         document.onsubmit = function (event){
             event.preventDefault();
             
             var namePlayer = document.getElementById("name").value;
-            myPlayer.name = namePlayer;
-//            console.log("test2");/
-            socket.emit("send_player",myPlayer);
+            socket.emit("send_player_name",namePlayer);
             return false;
         }
 	</script>
