@@ -17,10 +17,10 @@ function Personne( x, y) {
     this.size = 20;
 
     this.move = function(){
-        
+
         this.x+=this.dx;
         this.y+=this.dy;
-        
+
         if ( this.x + this.size >= canvas.width || this.x < 0){
             this.dx = 0;
         }
@@ -61,6 +61,11 @@ document.onkeydown = function(e) {
         // right arrow
         playerOne.dx=1;
         playerOne.dy=0;
+    }
+
+    if (e.keyCode == '32') {
+        // Espace
+        context.fillRect(200, 200, 20, 20);
     }
 }
 
