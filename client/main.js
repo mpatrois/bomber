@@ -15,12 +15,25 @@ function Personne( x, y) {
     this.dx = 0;
     this.dy = 0;
     this.size = 20;
-}
 
+    this.move = function(){
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        
+        if ( this.x + this.size >= canvas.width || this.x < 0){
+            this.dx = 0;
+        }
+        if ( this.y + this.size >= canvas.height || this.y < 0){
+            this.dy = 0;
+        }
+    }
+
+}
 
 var posX=0;
 var posY=0;
-var playerOne = new Personne( posX , posY);
+var playerOne = new Personne(posX , posY);
 
 var playerTwo = new Personne (20, 300);
 var playerThree = new Personne (10, 20);
@@ -53,8 +66,7 @@ document.onkeydown = function(e) {
 
 function update(){
     for (i=0; i < players.length; i++){
-        players[i].x+=players[i].dx;
-        players[i].y+=players[i].dy;
+        players[i].move();
     }
 }
 
