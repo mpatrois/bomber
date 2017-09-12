@@ -46,7 +46,7 @@ io.on('connection', function (socket) {
       
       });
 
-      socket.on('FirstMessage', function (data) {
+      socket.on('send_player', function (data) {
         
           // socketLab.emit('removePlayer',socket.id);
       		console.log(data);
