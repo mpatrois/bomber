@@ -1,3 +1,8 @@
+@font-face{
+    font-family:"Bomberman";
+    src:url(../fonts/Bomberman/bm.ttf);
+}
+
 div{
     display:inline-block;
 }
@@ -23,4 +28,43 @@ div form h2{
 
 #map-canvas,#table-players{
     float: left;
+}
+
+/* INDEX */
+h1{
+    font-family:"Bomberman";
+    text-align: center;
+    font-size: 60px;
+    border: 5px solid red;
+    background-color: white;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+body{
+    background-image: url("http://img.wennermedia.com/social/snes25-andymejias-1401x788-c3d9b91e-56b5-4b4b-86ff-95470e9ad32f.png");
+
+}
+
+
+#map-canvas{
+    margin-left: 50px;
+}
+
+#table-players{
+    margin-left: 100px;
+    width: 300px;
+    background-color: white;
+    border: 12px solid black;
+}
+
+#table-players thead th{
+    font-family:"Bomberman";
+
+}
+
+#table-players tbody td{
+    font-family:"Arial";
+
 }
