@@ -4,10 +4,11 @@
         <!-- Penser à faire l'orientation portrait/landscape pour forcer la prise en main en mode manette -->
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <title>Bomber</title>
-        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style_2.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
-        <div id="gamepad">
+        <!-- <div id="gamepad">
             <div class="top">HAUT</div>
             <div class="left">GAUCHE</div>
             <div class="bomb">.....</div>
@@ -16,6 +17,22 @@
         </div>
         <div id="bomb_launch">
             <div class="bombL">BOMBE</div>
+        </div> -->
+
+        <div id="gamepad">
+            <div id="joystick">
+                <div class="one-direction" id="joystick-hotizontal">
+                    <i id="btn-left" class="fa fa-caret-left" aria-hidden="true"></i>
+                    <i id="btn-right" class="fa fa-caret-right" aria-hidden="true"></i>
+                </div>
+                <div class="one-direction" id="joystick-vertical">
+                    <i id="btn-up" class="fa fa-caret-left" aria-hidden="true"></i>
+                    <i id="btn-down" class="fa fa-caret-right" aria-hidden="true"></i>
+                </div>
+                
+            </div>
+            <div id="control-a" class="control-button">A</div>
+            <div id="control-b" class="control-button">B</div>
         </div>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
@@ -46,4 +63,8 @@
         </script>
 
     </body>
+
+    <style type="text/css">
+
+    </style>
 </html>
