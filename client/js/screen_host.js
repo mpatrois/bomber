@@ -4,87 +4,26 @@
 
     document.addEventListener('DOMContentLoaded',function(){
 
-        var canvas = document.getElementById("map-canvas");
-        canvas.width  =  MAP_ORIGINAL[0].length * Pacman.BLOCK_SIZE;
-        canvas.height =   MAP_ORIGINAL.length * Pacman.BLOCK_SIZE; 
+        var game = new Game();
+
+        window.setInterval(function(){
+            game.mainLoop();
+        }, 1000 / Pacman.FPS);
 
 
-        context = canvas.getContext("2d");
-
-        var bombs = [];
-
-        Bombe.size = Pacman.BLOCK_SIZE;
-
-        map  = new Map();
-
-        var players = [];
-
-        var tablePlayers = new Vue({
+         var tablePlayers = new Vue({
           el: '#table-players',
           data: {
-            players: players
+            players: game.players
           }, 
           methods: {
             playersChanged: function(players) {
-                this.players = players;
+                this.players = game.players;
             }
           }
         })
 
-        // player = new Player(map);
-        
-        players = [];
-
-        function update(){
-            for (var id in players) {
-                players[id].move(context);
-            }
-        }
-
-        function render(){
-            context.clearRect(0,0,canvas.width,canvas.height);
-
-            map.draw(context);
-            
-            for (var id in players) {
-                players[id].draw(context);
-            }
-            for (var i = 0; i < players.length; i++) {
-                players[i].draw(context);
-            }
-
-            for (i=0; i < bombs.length; i++){
-                bombs[i].draw(context);
-            }
-        }
-
-        function mainLoop() {
-            update();
-            render();
-        }
-
-        window.setInterval(mainLoop, 1000 / Pacman.FPS);
-
-        // document.addEventListener("keydown", function(e) {
-        //         if (typeof keyMap[e.keyCode] !== "undefined") { 
-                    
-        //             for (var id in players) {
-        //                 players[id].setDue(keyMap[e.keyCode]);
-        //             }
-
-        //             e.preventDefault();
-        //             e.stopPropagation();
-        //             return false;
-        //         }
-        //         return true;
-        //     }, true);
-
         var socket = io.connect();
-        
-        var myPlayer = {
-            id:0,
-            name:"Thomas"
-        }
 
         socket.on('connect', function () {
             socket.emit("connect_host");
@@ -95,55 +34,53 @@
         });
 
         socket.on('welcome_host', function (allPlayersData) {
-            players = [];
+            game.players = [];
             for (var i = 0; i < allPlayersData.length; i++) {
-                var newPlayer = new Player(map);
+                var newPlayer = new Player(game.map);
                 newPlayer.id = allPlayersData[i].id
                 newPlayer.name = allPlayersData[i].name
 
-                players.push(newPlayer);
+                game.players.push(newPlayer);
             }
-            tablePlayers.playersChanged(players);
+            tablePlayers.playersChanged(game.players);
         });
 
         socket.on('new_player', function (newPlayData) {
-            var newPlayer = new Player(map);
+            var newPlayer = new Player(game.map);
                 newPlayer.id = newPlayData.id
                 newPlayer.name = newPlayData.name
 
-            players.push(newPlayer);
+            game.players.push(newPlayer);
 
-            tablePlayers.playersChanged(players);
+            tablePlayers.playersChanged(game.players);
         }); 
 
         socket.on('update_player', function (play) {
-            for (var i = 0; i < players.length; i++) {
-                if(players[i].id == play.id){
-                    players[i].name = play.name;
+            for (var i = 0; i < game.players.length; i++) {
+                if(game.players[i].id == play.id){
+                    game.players[i].name = play.name;
                 }
             }
-            tablePlayers.playersChanged(players);
+            tablePlayers.playersChanged(game.players);
         });
 
         socket.on('update_player_direction', function (data) {
-            console.log(data);
-            for (var i = 0; i < players.length; i++) {
-                if(players[i].id == data.id){
-                    players[i].setDue(data.direction);
+            for (var i = 0; i < game.players.length; i++) {
+                if(game.players[i].id == data.id){
+                    game.players[i].setDue(data.direction);
                 }
-            }
-            tablePlayers.playersChanged(players);
+            };
         });
 
         socket.on('delete_player', function (dataPlay) {
             var idx = -1;
-            for (var i = 0; i < players.length; i++) {
-                if(players[i].id == dataPlay.id){
+            for (var i = 0; i < game.players.length; i++) {
+                if(game.players[i].id == dataPlay.id){
                     idx = i;
                 }
             }
-            players.splice(idx, 1);
-            tablePlayers.playersChanged(players);
+            game.players.splice(idx, 1);
+            tablePlayers.playersChanged(game.players);
         });
 
 
