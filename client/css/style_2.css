@@ -1,6 +1,11 @@
 @font-face{
     font-family:"Bomberman";
-    src:url(fonts/Bomberman/bm.ttf);
+    src:url(../fonts/Bomberman/bm.ttf);
+}
+
+.title-pad{
+    font-family:"Bomberman";
+    text-align: center;
 }
 
 #joystick {
@@ -90,6 +95,7 @@
     right: 0;
     bottom: 0;
     position: absolute;
+    font-size: 90px;
 }
 #joystick-vertical{
     transform: rotate(90deg);
@@ -97,6 +103,7 @@
 
 #gamepad .fa{
     font-size: 102px;
+    width: 100px;
 }
 
 #gamepad .fa-caret-left{
@@ -109,22 +116,43 @@
 }
 
 @media screen and (max-width: 600px){
+    body{
+        position: fixed;
+    }
     #joystick{
         display: block;
         width: 300px;
         transform: rotate(90deg);
         margin: auto;
-        margin-bottom: 50px;
+    }
+    .one-direction{
+        width: 230px;
+        height: 90px;
+    }
+    #gamepad .fa{
+        font-size: 90px;
+        width: 70px;
     }
     .controler{
         display: block;
         position: static;
         width: 100%;
+        height: 100%;
     }
     #control-a{
         position: static;  
         transform: rotate(90deg);
+        width: 150px;
+        height: 150px;
+        line-height: 150px;
 
-
+    }
+    .title-pad{
+        transform: rotate(90deg);
+        position: absolute;
+        top: 40px;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 }
