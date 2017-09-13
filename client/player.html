@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 	<title>Bomber</title>
-	<link href="style.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 	<h1>BomberMan</h1>
-	<div>
-		<!-- <canvas width="800" height="800"></canvas> -->
-	
+
 	<form id="form">
-        <h2> Paramétrages </h2>
+<!--        <h2> Parametrages </h2> -->
 	    <label>Name : </label>
 	    <input id="name" type="text" name="PlayerName"> 
     </form>
-	</div>
+
 	<script type="text/javascript" src="js/socket.io.js"></script>
 
 	<script type="text/javascript">
@@ -27,7 +26,13 @@
         document.onsubmit = function (event){
             event.preventDefault();
             var namePlayer = document.getElementById("name").value;
+
+            myPlayer.name = namePlayer;
+            //console.log("test2");
+//            socket.emit/z("send_player",myPlayer);
+
             socket.emit("send_player_name",namePlayer);
+
             return false;
         }
 	</script>
