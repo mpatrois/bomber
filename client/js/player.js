@@ -1,9 +1,9 @@
 function Player (map) {
     
-    var rx = Math.floor(Math.random() * 10);
-    var ry = Math.floor(Math.random() * 10);
+    var rx = Math.floor(Math.random() * 2);
+    var ry = Math.floor(Math.random() * 2);
 
-    var position  = {"x": rx * Pacman.BLOCK_SIZE, "y": ry * Pacman.BLOCK_SIZE},
+    var position  = {"x": 1 * Pacman.BLOCK_SIZE, "y": 1 * Pacman.BLOCK_SIZE},
         direction = NONE,
         due       = NONE, 
         color     = '#e91e63',

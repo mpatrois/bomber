@@ -43,8 +43,6 @@ function removeItemFromArray(item,array){
 
 io.on('connection', function (socket) {
 
-      // sockets.push(socket);
-   
       socket.on('connect_host', function () {      
         socketsHosts.push(socket);
         console.log(getPlayers());
@@ -72,24 +70,9 @@ io.on('connection', function (socket) {
         io.sockets.emit('update_player',socket.__player);
       });
 
-      socket.on('send_player_dir', function (data) {
-          
-      });
-      
-      socket.on('lab', function (name) 
-      {
-          // socketLab=socket;
-      });
-      
-      socket.on('move', function (dirPlayer) 
-      {
-        var infos={id:socket.id,dir:dirPlayer};
-        // socketLab.emit('move',infos);
-      });
-      
-      socket.on('newPlayer', function (infosPlayer)
-      {
-          // socketLab.emit('newPlayer',{id:socket.id,col:infosPlayer.col,name:infosPlayer.name});
+
+      socket.on('send_move', function (direction) {
+          io.sockets.emit('update_player_direction',{'id':socket.__player.id,'direction':direction});
       });
       
     

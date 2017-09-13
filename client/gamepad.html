@@ -8,27 +8,17 @@
         <link href="css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
-        <!-- <div id="gamepad">
-            <div class="top">HAUT</div>
-            <div class="left">GAUCHE</div>
-            <div class="bomb">.....</div>
-            <div class="right">DROITE</div>
-            <div class="down">BAS</div>
-        </div>
-        <div id="bomb_launch">
-            <div class="bombL">BOMBE</div>
-        </div> -->
 
         <div id="gamepad">
             <div id="joystick">
-                <div class="one-direction" id="joystick-hotizontal">
-                    <i id="btn-left" class="fa fa-caret-left" aria-hidden="true"></i>
-                    <i id="btn-right" class="fa fa-caret-right" aria-hidden="true"></i>
-                </div><div class="one-direction" id="joystick-vertical">
-                    <i id="btn-up" class="fa fa-caret-left" aria-hidden="true"></i>
-                    <i id="btn-down" class="fa fa-caret-right" aria-hidden="true"></i>
+                <div class="one-direction" id="joystick-horizontal">
+                    <i id="btn-left" class="fa fa-caret-left" aria-hidden="true" onclick="move(2)"></i>
+                    <i id="btn-right" class="fa fa-caret-right" aria-hidden="true" onclick="move(11)"></i>
                 </div>
-                
+                <div class="one-direction" id="joystick-vertical">
+                    <i id="btn-up" class="fa fa-caret-left" aria-hidden="true" onclick="move(3)"></i>
+                    <i id="btn-down" class="fa fa-caret-right" aria-hidden="true" onclick="move(1)"></i>
+                </div>
             </div>
             <div class="controler">
                 <div id="control-a" class="control-button">A</div>
@@ -37,30 +27,42 @@
         </div>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+        <script type="text/javascript" src="js/constant.js"></script>
 
         <script type="text/javascript">
+            // var socket = io.connect();
+
+            // UP          = 3,
+            // LEFT        = 2,
+            // DOWN        = 1,
+            // RIGHT       = 11;
+
             var socket = io.connect();
 
-            var myPlayer = {
-                id:0,
-                name:"Thomas"
-            }
-
             socket.on('connect', function () {
-                myPlayer.id = socket.id;
-                socket.emit("my_name",myPlayer);
+                socket.emit("connect_player");
             });
 
-            console.log("test1");
-            document.onsubmit = function (event){
-                event.preventDefault();
 
-                var namePlayer = document.getElementById("name").value;
-                myPlayer.name = namePlayer;
-                //console.log("test2");
-                socket.emit("send_player",myPlayer);
-                return false;
+            document.addEventListener("keydown", function(e) {
+                if (typeof keyMap[e.keyCode] !== "undefined") { 
+                    socket.emit("send_move",keyMap[e.keyCode]);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                return true;
+            }, true);
+
+            function move(DIR){
+                // console.log(DIR);
+                socket.emit("send_move",DIR);
             }
+
+
+
+
+
         </script>
 
     </body>
