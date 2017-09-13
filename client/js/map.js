@@ -74,7 +74,6 @@ function Map(size) {
     return {
         "draw"         : draw,
         "drawBlock"    : drawBlock,
-        // "drawPills"    : drawPills,
         "block"        : block,
         "setBlock"     : setBlock,
         "reset"        : reset,

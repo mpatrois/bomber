@@ -6,9 +6,12 @@ function Player (map) {
     var position  = {"x": 1 * Pacman.BLOCK_SIZE, "y": 1 * Pacman.BLOCK_SIZE},
         direction = NONE,
         due       = NONE, 
-        color     = '#e91e63',
-        velocity  = Pacman.BLOCK_SIZE/6;
+        velocity  = Pacman.BLOCK_SIZE/10;
 
+    this.wantToDropBomb = false;
+    this.alreadyABomb = true;
+
+    this.color     = '#e91e63';
 
     function setCase(x,y) {
         position = {"x": x * Pacman.BLOCK_SIZE, "y": y * Pacman.BLOCK_SIZE};
@@ -66,7 +69,7 @@ function Player (map) {
       
     };
 
-    function move() {
+    function move(bombs) {
         
         var npos 		= null, 
         	oldPosition = position;
@@ -93,7 +96,7 @@ function Player (map) {
         if (direction === NONE) {
             return {"new" : position, "old" : position};
         }
-        
+
         position = npos;
         
                 
@@ -105,9 +108,22 @@ function Player (map) {
 
     function draw(ctx,image) { 
         var s = map.blockSize;
-        ctx.fillStyle = color;
+        ctx.fillStyle = this.color;
         ctx.fillRect( (position.x/s) * s,(position.y/s) * s,s,s);
     };
+
+
+    function dropBomb(bombs){
+        if(onGridSquare(position) && this.wantToDropBomb && !this.alreadyABomb){
+            var bomb = new Bombe(pointToCoord(position.x),pointToCoord(position.y),this);
+            bombs.push(bomb);
+            this.wantToDropBomb = false;
+            this.alreadyABomb = true;
+
+        }else if(this.wantToDropBomb && this.alreadyABomb){
+            this.wantToDropBomb = false;
+        }
+    }
 
 
     
@@ -117,8 +133,10 @@ function Player (map) {
         "draw"          : draw,
         // "score"         : score,
         "move"          : move,
-        "setDue"      : setDue,
-        "setCase"      : setCase,
+        "setDue"        : setDue,
+        "setCase"       : setCase,
+        "dropBomb"      : dropBomb,
+        // "wantToDropBomb": wantToDropBomb,
         // "newLevel"      : newLevel,
         // "reset"         : reset,
         // "resetPosition" : resetPosition
