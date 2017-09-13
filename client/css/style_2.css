@@ -4,7 +4,7 @@
 }
 
 #joystick {
-/*    z-index: 14;
+    /*    z-index: 14;
     width: 110px;
     height: 110px;
     bottom: 130px;
@@ -15,11 +15,18 @@
     text-indent: 43px;
     color: #222;
     /* -webkit-animation: joystick 8s infinite linear,joystick 8s infinite linear; */
-    /* animation: joystick 8s infinite linear,joystick 8s infinite linear; */*/
+    /* animation: joystick 8s infinite linear,joystick 8s infinite linear; */
+
+    width: 300px;
+    height: 300px;
+    position: relative;
+    display: inline-block;
+    width: 50%;
 }
 
 #gamepad{
     position: relative;
+    white-space: nowrap;
 }
 
 #control-b {
@@ -41,8 +48,8 @@
 }
 
 #control-a {
-    right: 34px;
-    bottom: 176px;
+    /*    right: 34px;*/
+    /*    bottom: 176px;*/
     -webkit-animation: control-a 8s infinite linear,control-a 8s infinite linear;
     animation: control-a 8s infinite linear,control-a 8s infinite linear;
 }
@@ -53,6 +60,32 @@
     text-align: center;
     width: 300px;
     height: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.controler{
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    height: 300px;
+}
+#control-a{
+    width: 200px;
+    margin: auto;
+    text-align: center;
+    background-color: red;
+    height: 200px;
+    border-radius: 50%;
+    line-height: 200px;
+    color: white;
+    font-family:"Bomberman";
+}
+#joystick-vertical{
+    transform: rotate(90deg);
 }
 
 #gamepad .fa{
@@ -60,10 +93,11 @@
 }
 
 #gamepad .fa-caret-left{
-position: absolute;
-left: 0px;
+    position: absolute;
+    left: 0px;
 }
 #gamepad .fa-caret-right{
-position: absolute;
-right: 0px;
+    position: absolute;
+    right: 0px;
 }
+
