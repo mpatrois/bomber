@@ -65,7 +65,16 @@ function Player(x, y) {
     }
 
     this.dropBomb = function(bombs){
-    	bombs.push(new Bombe(this.x,this.y,this.size,2));
+    	var bomb = new Bombe(this.x,this.y,this.size,2);
+        bomb.time = 3;
+        
+        setInterval(function(){
+            if(bomb.time >0){
+                bomb.time--;
+            }
+        },1000);
+        
+        bombs.push(bomb);
     }
 
 }
