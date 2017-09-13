@@ -74,6 +74,14 @@
             };
         });
 
+        socket.on('update_player_bomb', function (data) {
+            for (var i = 0; i < game.players.length; i++) {
+                if(game.players[i].id == data.id){
+                    game.players[i].wantToDropBomb = true;
+                }
+            };
+        });
+
         socket.on('delete_player', function (dataPlay) {
             var idx = -1;
             for (var i = 0; i < game.players.length; i++) {

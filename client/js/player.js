@@ -8,8 +8,10 @@ function Player (map) {
         due       = NONE, 
         velocity  = Pacman.BLOCK_SIZE/10;
 
-    this.color     = '#e91e63';
+    this.wantToDropBomb = false;
+    this.alreadyABomb = true;
 
+    this.color     = '#e91e63';
 
     function setCase(x,y) {
         position = {"x": x * Pacman.BLOCK_SIZE, "y": y * Pacman.BLOCK_SIZE};
@@ -67,7 +69,7 @@ function Player (map) {
       
     };
 
-    function move() {
+    function move(bombs) {
         
         var npos 		= null, 
         	oldPosition = position;
@@ -94,7 +96,7 @@ function Player (map) {
         if (direction === NONE) {
             return {"new" : position, "old" : position};
         }
-        
+
         position = npos;
         
                 
@@ -111,6 +113,19 @@ function Player (map) {
     };
 
 
+    function dropBomb(bombs){
+        if(onGridSquare(position) && this.wantToDropBomb && !this.alreadyABomb){
+            var bomb = new Bombe(pointToCoord(position.x),pointToCoord(position.y),this);
+            bombs.push(bomb);
+            this.wantToDropBomb = false;
+            this.alreadyABomb = true;
+
+        }else if(this.wantToDropBomb && this.alreadyABomb){
+            this.wantToDropBomb = false;
+        }
+    }
+
+
     
     // initUser();
 
@@ -118,8 +133,10 @@ function Player (map) {
         "draw"          : draw,
         // "score"         : score,
         "move"          : move,
-        "setDue"      : setDue,
-        "setCase"      : setCase,
+        "setDue"        : setDue,
+        "setCase"       : setCase,
+        "dropBomb"      : dropBomb,
+        // "wantToDropBomb": wantToDropBomb,
         // "newLevel"      : newLevel,
         // "reset"         : reset,
         // "resetPosition" : resetPosition

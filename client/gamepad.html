@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="controler">
-                <div id="control-a" class="control-button">A</div>
+                <div id="control-a" class="control-button" ontouchstart="dropBomb()">A</div>
 <!--                <div id="control-b" class="control-button">B</div>-->
             </div>
         </div>
@@ -53,14 +53,24 @@
                     socket.emit("send_move",keyMap[e.keyCode]);
                     e.preventDefault();
                     e.stopPropagation();
-                    return false;
                 }
+                else if(e.keyCode == 65){
+                    dropBomb();
+                }
+
+                console.log(e.keyCode);
+
                 return true;
+
             }, true);
 
             function move(DIR){
                 // console.log(DIR);
                 socket.emit("send_move",DIR);
+            }
+
+            function dropBomb(){
+                socket.emit("send_bomb",true);
             }
 
 

@@ -69,7 +69,7 @@ io.on('connection', function (socket) {
           
 
           socket.emit('you_are_accepted',socket.__player);
-          
+
           io.sockets.emit('new_player',socket.__player);
 
       });
@@ -90,6 +90,10 @@ io.on('connection', function (socket) {
 
       socket.on('send_move', function (direction) {
           io.sockets.emit('update_player_direction',{'id':socket.__player.id,'direction':direction});
+      });
+
+      socket.on('send_bomb', function (direction) {
+          io.sockets.emit('update_player_bomb',{'id':socket.__player.id});
       });
       
     
