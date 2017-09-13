@@ -4,6 +4,8 @@ function Map(size) {
         width     = null, 
         blockSize = Pacman.BLOCK_SIZE,
         map       = MAP_ORIGINAL.slice(0);
+
+    // this.map = map;
     
     function withinBounds(y, x) {
         return y >= 0 && y < height && x >= 0 && x < width;
@@ -11,6 +13,10 @@ function Map(size) {
     
     function isWallSpace(pos) {
         return withinBounds(pos.y, pos.x) && ( map[pos.y][pos.x] === Pacman.WALL || map[pos.y][pos.x] === Pacman.BRICK ) ;
+    }
+
+    function isWall(x,y) {
+        return withinBounds(y, x) && ( map[y][x] === Pacman.WALL ) ;
     }
     
     function isFloorSpace(pos) {
@@ -78,9 +84,13 @@ function Map(size) {
         "setBlock"     : setBlock,
         "reset"        : reset,
         "isWallSpace"  : isWallSpace,
+        "isWall"       : isWall,
         "isFloorSpace" : isFloorSpace,
         "height"       : height,
         "width"        : width,
-        "blockSize"    : blockSize
+        "height"       : height,
+        "blockSize"    : blockSize,
+        "map"    : map,
+        "withinBounds" : withinBounds
     };
 };

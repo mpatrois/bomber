@@ -59,15 +59,12 @@
                     dropBomb();
                 }
 
-                console.log(e.keyCode);
-
                 return true;
 
             }, true);
 
-            function move(DIR){
-                // console.log(DIR);
-                socket.emit("send_move",DIR);
+            function move(dir){
+                socket.emit("send_move",dir);
             }
 
             function dropBomb(){
