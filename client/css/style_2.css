@@ -90,6 +90,7 @@
 
 #gamepad .fa{
     font-size: 102px;
+    width: 100px;
 }
 
 #gamepad .fa-caret-left{

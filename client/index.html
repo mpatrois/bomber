@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <tr v-for="player in players">
-                    <td>{{player.name}}</td>
+                    <td v-bind:style="{'background':player.color}">{{player.name}}</td>
                 </tr> 
             </tbody>
         </table>

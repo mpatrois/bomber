@@ -37,8 +37,9 @@
             game.players = [];
             for (var i = 0; i < allPlayersData.length; i++) {
                 var newPlayer = new Player(game.map);
-                newPlayer.id = allPlayersData[i].id
-                newPlayer.name = allPlayersData[i].name
+                newPlayer.id = allPlayersData[i].id;
+                newPlayer.name = allPlayersData[i].name;
+                newPlayer.color = allPlayersData[i].color;
 
                 game.players.push(newPlayer);
             }
@@ -49,6 +50,7 @@
             var newPlayer = new Player(game.map);
                 newPlayer.id = newPlayData.id
                 newPlayer.name = newPlayData.name
+                newPlayer.color = newPlayData.color
 
             game.players.push(newPlayer);
 

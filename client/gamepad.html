@@ -12,12 +12,12 @@
         <div id="gamepad">
             <div id="joystick">
                 <div class="one-direction" id="joystick-horizontal">
-                    <i id="btn-left" class="fa fa-caret-left" aria-hidden="true" onclick="move(2)"></i>
-                    <i id="btn-right" class="fa fa-caret-right" aria-hidden="true" onclick="move(11)"></i>
+                    <i id="btn-left" class="fa fa-caret-left" aria-hidden="true" ontouchstart="move(2)"></i>
+                    <i id="btn-right" class="fa fa-caret-right" aria-hidden="true" ontouchstart="move(11)"></i>
                 </div>
                 <div class="one-direction" id="joystick-vertical">
-                    <i id="btn-up" class="fa fa-caret-left" aria-hidden="true" onclick="move(3)"></i>
-                    <i id="btn-down" class="fa fa-caret-right" aria-hidden="true" onclick="move(1)"></i>
+                    <i id="btn-up" class="fa fa-caret-left" aria-hidden="true" ontouchstart="move(3)"></i>
+                    <i id="btn-down" class="fa fa-caret-right" aria-hidden="true" ontouchstart="move(1)"></i>
                 </div>
             </div>
             <div class="controler">
@@ -41,6 +41,10 @@
 
             socket.on('connect', function () {
                 socket.emit("connect_player");
+            });
+
+            socket.on('you_are_accepted', function (play) {
+                document.getElementById('control-a').style.background = play.color;
             });
 
 

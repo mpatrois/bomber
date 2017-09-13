@@ -41,6 +41,16 @@ function removeItemFromArray(item,array){
   }
 }
 
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 io.on('connection', function (socket) {
 
       socket.on('connect_host', function () {      
@@ -49,12 +59,19 @@ io.on('connection', function (socket) {
         io.sockets.emit('welcome_host',getPlayers());
       });
 
-      socket.on('connect_player', function () {      
-        socketsPlayers.push(socket);
-        socket.__player = {};
-        socket.__player.id   = socket.id;
-        socket.__player.name = "Player n° " + (idPlay++);
-        io.sockets.emit('new_player',socket.__player);
+      socket.on('connect_player', function () {
+
+          socketsPlayers.push(socket);
+          socket.__player = {};
+          socket.__player.id   = socket.id;
+          socket.__player.name = "Player n° " + (idPlay++);
+          socket.__player.color = getRandomColor();
+          
+
+          socket.emit('you_are_accepted',socket.__player);
+          
+          io.sockets.emit('new_player',socket.__player);
+
       });
 
 

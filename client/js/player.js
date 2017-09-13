@@ -6,8 +6,9 @@ function Player (map) {
     var position  = {"x": 1 * Pacman.BLOCK_SIZE, "y": 1 * Pacman.BLOCK_SIZE},
         direction = NONE,
         due       = NONE, 
-        color     = '#e91e63',
-        velocity  = Pacman.BLOCK_SIZE/6;
+        velocity  = Pacman.BLOCK_SIZE/10;
+
+    this.color     = '#e91e63';
 
 
     function setCase(x,y) {
@@ -105,7 +106,7 @@ function Player (map) {
 
     function draw(ctx,image) { 
         var s = map.blockSize;
-        ctx.fillStyle = color;
+        ctx.fillStyle = this.color;
         ctx.fillRect( (position.x/s) * s,(position.y/s) * s,s,s);
     };
 
