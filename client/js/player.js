@@ -13,6 +13,9 @@ function Player (map) {
 
     this.color     = '#e91e63';
 
+    this.isDead = false;
+
+
     function setCase(x,y) {
         position = {"x": x * Pacman.BLOCK_SIZE, "y": y * Pacman.BLOCK_SIZE};
     };
@@ -126,6 +129,14 @@ function Player (map) {
     }
 
 
+    function isOnCase(caseX,caseY){
+        if( pointToCoord(position.x) == caseX && pointToCoord(position.y) == caseY){
+            return true;
+        }
+        return false;
+    }
+
+
     
     // initUser();
 
@@ -136,6 +147,7 @@ function Player (map) {
         "setDue"        : setDue,
         "setCase"       : setCase,
         "dropBomb"      : dropBomb,
+        "isOnCase"      : isOnCase,
         // "wantToDropBomb": wantToDropBomb,
         // "newLevel"      : newLevel,
         // "reset"         : reset,

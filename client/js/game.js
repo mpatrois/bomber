@@ -42,21 +42,44 @@ function Game(){
 
         if((Date.now()-timeStamp)/1000 > 1){
             timeStamp = Date.now();
+            
             for (var i = 0; i < bombs.length; i++) {
+                
                 bombs[i].time--;
+                
                 if(bombs[i].time==0){
+
+                    // console.log(bombs[i]);
+
                     if(bombs[i].player){
-                        bombs[i].player.alreadyABomb = false; 
+                        bombs[i].player.alreadyABomb = false;
                     }
+                    var casesToDestroy = bombs[i].getCasesAimed(this.map);
+                    for (var caseI = 0; caseI < casesToDestroy.length; caseI++) {
+                        var c = casesToDestroy[caseI];
+                        this.map.map[c.caseY][c.caseX] = 2;
+
+                        for (var plyIdx = 0; plyIdx < this.players.length; plyIdx++) {
+                            if(this.players[plyIdx].isOnCase(c.caseX,c.caseY)){
+                                this.players[plyIdx].isDead = true;
+                                console.log(this.players[plyIdx]);
+                            }
+                        }
+
+                    }
+                    // console.log(bombsToExplode);
+                    // console.log(bombs[i]);
                     bombsToExplode.push(bombs[i]);
+                    // console.log(bombsToExplode);
                 }
             }
         }
 
+        // console.log(bombsToExplode,"a");
+
 
         bombs = bombs.filter(function(element){
             for (var i = 0; i < bombsToExplode.length; i++) {
-                console.log(bombsToExplode[i],element);
                 if(bombsToExplode[i] == element){
                     return false;
                 }
@@ -76,7 +99,9 @@ function Game(){
         }
     
         for (var i = 0; i < this.players.length; i++) {
-            this.players[i].draw(context);
+            if(!this.players[i].isDead ){
+                this.players[i].draw(context);
+            }
         }
 
     }

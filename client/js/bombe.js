@@ -23,7 +23,69 @@ function Bombe(cx,cy,player) {
     }
 
 
-    this.onexplode = function(){
+    this.getCasesAimed = function(map){
+
+        var cases = [];
+
+        var isWall = false;
+
+
+        //RIGHT
+        for (var cX = this.caseX; cX < this.caseX + 3; cX++) {
+
+            if (map.isWall(cX,this.caseY)){
+                isWall = true;
+            };
+
+            if(!isWall){
+                cases.push({caseX:cX,caseY:this.caseY});
+            }
+        }
+
+        isWall = false;
+
+        //LEFT
+        for (var cX = this.caseX-1; cX > this.caseX - 3; cX--) {
+
+            if (map.isWall(cX,this.caseY)){
+                isWall = true;
+            };
+
+            if(!isWall){
+                cases.push({caseX:cX,caseY:this.caseY});
+            }
+        }
+
+
+        isWall = false;
+        //UP
+        for (var cY = this.caseY-1; cY > this.caseY - 3; cY--) {
+
+            if (map.isWall(this.caseX,cY)){
+                isWall = true;
+            };
+
+            if(!isWall){
+                cases.push({caseX:this.caseX,caseY:cY});
+            }
+        }
+
+         var isWall = false;
+        //DOWN
+        for (var cY = this.caseY+1; cY < this.caseY + 3; cY++) {
+
+            if (map.isWall(this.caseX,cY)){
+                isWall = true;
+            };
+
+            if(!isWall){
+                cases.push({caseX:this.caseX,caseY:cY});
+            }
+        }
+
+
+        return cases;
+
 
     }
 
