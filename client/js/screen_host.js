@@ -65,25 +65,19 @@
 
         window.setInterval(mainLoop, 1000 / Pacman.FPS);
 
-        var keyMap = {};
-        keyMap[KEY.ARROW_LEFT]  = LEFT;
-        keyMap[KEY.ARROW_UP]    = UP;
-        keyMap[KEY.ARROW_RIGHT] = RIGHT;
-        keyMap[KEY.ARROW_DOWN]  = DOWN;
-
-        document.addEventListener("keydown", function(e) {
-                if (typeof keyMap[e.keyCode] !== "undefined") { 
+        // document.addEventListener("keydown", function(e) {
+        //         if (typeof keyMap[e.keyCode] !== "undefined") { 
                     
-                    for (var id in players) {
-                        players[id].setDue(keyMap[e.keyCode]);
-                    }
+        //             for (var id in players) {
+        //                 players[id].setDue(keyMap[e.keyCode]);
+        //             }
 
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-                return true;
-            }, true);
+        //             e.preventDefault();
+        //             e.stopPropagation();
+        //             return false;
+        //         }
+        //         return true;
+        //     }, true);
 
         var socket = io.connect();
         
@@ -126,6 +120,16 @@
             for (var i = 0; i < players.length; i++) {
                 if(players[i].id == play.id){
                     players[i].name = play.name;
+                }
+            }
+            tablePlayers.playersChanged(players);
+        });
+
+        socket.on('update_player_direction', function (data) {
+            console.log(data);
+            for (var i = 0; i < players.length; i++) {
+                if(players[i].id == data.id){
+                    players[i].setDue(data.direction);
                 }
             }
             tablePlayers.playersChanged(players);
