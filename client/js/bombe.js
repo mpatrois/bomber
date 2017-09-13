@@ -1,13 +1,10 @@
-var canvas=document.getElementById("map");
-context = this.canvas.getContext("2d");
 
-
-function Bombe( x, y, size, time) {
+function Bombe(x,y,time) {
     this.x = x;
     this.y = y;
     this.dx = 0;
     this.dy = 0;
-    this.size = size;
+    this.size = 20;
     this.time = 0;
     this.color = '#e7729F';
 
@@ -27,3 +24,16 @@ function Bombe( x, y, size, time) {
 }
 
 
+// function Brick(x,y){
+// 	this.x = x;
+//     this.y = y;
+//     this.size = 20;
+//     this.color = "orange";
+
+//      this.draw = function (ctx){
+//  	    ctx.fillStyle = this.color;
+// 		ctx.fillRect(this.x, this.y, this.size, this.size);
+//     }
+
+
+// }
