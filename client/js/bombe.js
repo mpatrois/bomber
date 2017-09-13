@@ -9,7 +9,7 @@ function Bombe(cx,cy,player) {
     this.draw = function (ctx){
         context.beginPath();
 
-        var posOnScreen = {x:this.caseX*this.size,y:this.caseY*this.size}
+        var posOnScreen = {x:this.caseX*this.size,y:this.caseY*this.size};
 
         context.arc(posOnScreen.x+this.size/2,posOnScreen.y+this.size/2, this.size/2, 0, 2 * Math.PI, false);
         context.fillStyle = this.player.color ;
@@ -89,6 +89,31 @@ function Bombe(cx,cy,player) {
 
     }
 
+}
+
+
+function Explosion(cx,cy){
+    // this.caseX = cx;
+    // this.caseY = cy;
+    // this.size = Pacman.BLOCK_SIZE;
+    time = 3;
+
+    this.step = 0;
+    var img = document.getElementById("bombe-sprite");
+    
+    this.draw = function(ctx){
+
+        var posOnScreen = {x:cx* Pacman.BLOCK_SIZE, y: cy* Pacman.BLOCK_SIZE};
+
+        // console.log(this.step);
+        ctx.drawImage(img,115+this.step*42,117,42,42,posOnScreen.x,posOnScreen.y,Pacman.BLOCK_SIZE,Pacman.BLOCK_SIZE);
+    }
+
+
+    // return {
+    //     'draw' : draw,
+    //     // 'step' : step,
+    // };
 }
 
 

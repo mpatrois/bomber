@@ -1,18 +1,6 @@
 function Game(){
 
-    // Array.prototype.diff = function(a) {
-    //     return this.filter(function(i) {return a.indexOf(i) < 0;});
-    // };
-
-    // Array.prototype.diff = function(a) {
-    //     return this.filter(function(i) {
-    //                             console.log(a,i);
-    //                             return a != i;
-    //                         }
-    //                     );
-    // };
-
-
+   
     var canvas = document.getElementById("map-canvas");
     canvas.width  =  MAP_ORIGINAL[0].length * Pacman.BLOCK_SIZE;
     canvas.height =   MAP_ORIGINAL.length * Pacman.BLOCK_SIZE; 
@@ -25,23 +13,30 @@ function Game(){
     this.map  = new Map();
     this.players = [];
 
+    var explosions = [];
 
-    var timeStamp = Date.now();
+
+    var timeStampBomb = Date.now();
+    var timeStampExplosion = Date.now();
 
     this.update = function(){
         
         for (var i=0;i < this.players.length; i++) {
-            this.players[i].move(bombs);
-            if(this.players[i].wantToDropBomb){
-                this.players[i].dropBomb(bombs);
+            
+            if(!this.players[i].isDead)
+            {
+                this.players[i].move(bombs);
+                if(this.players[i].wantToDropBomb){
+                    this.players[i].dropBomb(bombs);
+                }
             }
         } 
 
         var bombsToExplode = [];
         
 
-        if((Date.now()-timeStamp)/1000 > 1){
-            timeStamp = Date.now();
+        if((Date.now()-timeStampBomb)/1000 > 1){
+            timeStampBomb = Date.now();
             
             for (var i = 0; i < bombs.length; i++) {
                 
@@ -55,22 +50,21 @@ function Game(){
                         bombs[i].player.alreadyABomb = false;
                     }
                     var casesToDestroy = bombs[i].getCasesAimed(this.map);
+                    
                     for (var caseI = 0; caseI < casesToDestroy.length; caseI++) {
                         var c = casesToDestroy[caseI];
                         this.map.map[c.caseY][c.caseX] = 2;
 
+                        explosions.push(new Explosion(c.caseX,c.caseY));
+
+
                         for (var plyIdx = 0; plyIdx < this.players.length; plyIdx++) {
                             if(this.players[plyIdx].isOnCase(c.caseX,c.caseY)){
                                 this.players[plyIdx].isDead = true;
-                                console.log(this.players[plyIdx]);
                             }
                         }
-
                     }
-                    // console.log(bombsToExplode);
-                    // console.log(bombs[i]);
                     bombsToExplode.push(bombs[i]);
-                    // console.log(bombsToExplode);
                 }
             }
         }
@@ -89,6 +83,10 @@ function Game(){
 
     }
 
+    // var c=document.getElementById("myCanvas");
+    // var ctx=c.getContext("2d");
+    
+
     this.render = function(){
         context.clearRect(0,0,canvas.width,canvas.height);
         
@@ -97,12 +95,26 @@ function Game(){
         for (i=0; i < bombs.length; i++){
             bombs[i].draw(context);
         }
+        for (i=0; i < explosions.length; i++){
+            explosions[i].draw(context);
+        }
+        if((Date.now()-timeStampExplosion) > 200){
+            timeStampExplosion = Date.now();
+            for (i=0; i < explosions.length; i++){
+                explosions[i].step++;
+            } 
+        }
     
         for (var i = 0; i < this.players.length; i++) {
             if(!this.players[i].isDead ){
                 this.players[i].draw(context);
             }
         }
+
+
+
+
+
 
     }
 

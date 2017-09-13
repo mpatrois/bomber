@@ -88,7 +88,7 @@ function Map(size) {
         "isFloorSpace" : isFloorSpace,
         "height"       : height,
         "width"        : width,
-        "width"        : width,
+        "height"       : height,
         "blockSize"    : blockSize,
         "map"    : map,
         "withinBounds" : withinBounds

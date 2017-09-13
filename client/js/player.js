@@ -1,12 +1,13 @@
 function Player (map) {
     
-    var rx = Math.floor(Math.random() * 2);
-    var ry = Math.floor(Math.random() * 2);
+    var rx = Math.floor(Math.random() * 2) ? 1 : map.width-2;
+    var ry = Math.floor(Math.random() * 2) ? 1 : map.height-2;
+    // var ry = Math.floor(Math.random() * 2);
 
-    var position  = {"x": 1 * Pacman.BLOCK_SIZE, "y": 1 * Pacman.BLOCK_SIZE},
+    var position  = {"x": rx * Pacman.BLOCK_SIZE, "y": ry * Pacman.BLOCK_SIZE},
         direction = NONE,
         due       = NONE, 
-        velocity  = Pacman.BLOCK_SIZE/10;
+        velocity  = Pacman.BLOCK_SIZE/12;
 
     this.wantToDropBomb = false;
     this.alreadyABomb = true;
