@@ -19,18 +19,14 @@
 
         var players = [];
 
-        var app4 = new Vue({
+        var tablePlayers = new Vue({
           el: '#table-players',
           data: {
             players: players
           }, 
           methods: {
             playersChanged: function(players) {
-                // console.log(this.players);
-                // console.log(this.players);
                 this.players = players;
-              // Vue.set(this.players,players);
-              // alert(this.numbers[1]);
             }
           }
         })
@@ -104,29 +100,26 @@
             socket.emit("disconnect_host");
         });
 
-        socket.on('welcome_host', function (allPlayers) {
+        socket.on('welcome_host', function (allPlayersData) {
             players = [];
-            for (var i = 0; i < allPlayers.length; i++) {
+            for (var i = 0; i < allPlayersData.length; i++) {
                 var newPlayer = new Player(map);
-                newPlayer.id = allPlayers[i].id
-                newPlayer.name = allPlayers[i].name
+                newPlayer.id = allPlayersData[i].id
+                newPlayer.name = allPlayersData[i].name
 
                 players.push(newPlayer);
             }
-            app4.playersChanged(players);
+            tablePlayers.playersChanged(players);
         });
 
-        socket.on('new_player', function (newPlay) {
-            console.log(newPlay);
-            console.log(players);
-
+        socket.on('new_player', function (newPlayData) {
             var newPlayer = new Player(map);
-                newPlayer.id = newPlay.id
-                newPlayer.name = newPlay.name
+                newPlayer.id = newPlayData.id
+                newPlayer.name = newPlayData.name
 
             players.push(newPlayer);
 
-            app4.playersChanged(players);
+            tablePlayers.playersChanged(players);
         }); 
 
         socket.on('update_player', function (play) {
@@ -135,13 +128,19 @@
                     players[i].name = play.name;
                 }
             }
-            app4.playersChanged(players);
+            tablePlayers.playersChanged(players);
         });
 
-        
-
-
-
+        socket.on('delete_player', function (dataPlay) {
+            var idx = -1;
+            for (var i = 0; i < players.length; i++) {
+                if(players[i].id == dataPlay.id){
+                    idx = i;
+                }
+            }
+            players.splice(idx, 1);
+            tablePlayers.playersChanged(players);
+        });
 
 
     });

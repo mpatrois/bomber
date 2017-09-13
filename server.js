@@ -63,7 +63,7 @@ io.on('connection', function (socket) {
       socket.on('disconnect', function () {      
         removeItemFromArray(socket,socketsHosts);
         removeItemFromArray(socket,socketsPlayers);
-        // io.sockets.emit('disconnect_player',);
+        io.sockets.emit('delete_player',socket.__player);
       });
 
 
