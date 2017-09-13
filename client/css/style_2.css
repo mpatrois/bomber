@@ -32,6 +32,10 @@
 #gamepad{
     position: relative;
     white-space: nowrap;
+
+    background-color: #0d0d0d;
+    border: 5px solid grey;
+    padding: 20px;
 }
 
 #control-b {
@@ -96,6 +100,12 @@
     bottom: 0;
     position: absolute;
     font-size: 90px;
+    box-shadow:  1px 1px 10px white inset, 0 1px 0 rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+}
+#control-a:active{
+    background-color: rgba(0, 0, 0, 0.15) !important;
+    box-shadow:  1px 1px 10px white inset, 0 1px 0 rgba(0, 0, 0, 0.15);
 }
 #joystick-vertical{
     transform: rotate(90deg);
@@ -104,6 +114,8 @@
 #gamepad .fa{
     font-size: 102px;
     width: 100px;
+    width: 96px;
+    height: 100px;
 }
 
 #gamepad .fa-caret-left{
@@ -113,6 +125,38 @@
 #gamepad .fa-caret-right{
     position: absolute;
     right: 0px;
+}
+
+#btn-left{
+    border: 4px solid white;
+    border-right: 0;
+    margin-top: -4px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+#btn-right{
+    border: 4px solid white;
+    border-left: 0;
+    margin-top: -4px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+}
+#btn-up{
+    border: 4px solid white;
+    border-right: 0;
+    margin-top: -4px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+}
+#btn-down{
+    border: 4px solid white;
+    border-left: 0;
+    margin-top: -4px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
 }
 
 @media screen and (max-width: 600px){
