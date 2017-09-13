@@ -1,18 +1,3 @@
-// var express = require("express");
-// var app     = express();
-// var path    = require("path");
-
-
-// app.get('/',function(req,res){
-//   res.sendFile(path.join(__dirname+'/index.html'));
-//   //__dirname : It will resolve to your project folder.
-// });
-
-
-// app.listen(3000);
-
-// console.log("Running at Port 3000");
-
 var http = require('http');
 var path = require('path');
 
@@ -34,22 +19,61 @@ router.use(express.static(path.resolve(__dirname, 'client')));
 var messages = [];
 var sockets = [];
 var nbPlayers=0;
-var socketLab;
+
+var socketsHosts = [];
+var socketsPlayers = [];
+
+var idPlay = 1;
+
+function getPlayers(){
+  var players = [];
+  for (var i = 0; i < socketsPlayers.length; i++) {
+      players.push(socketsPlayers[i].__player);
+  }
+  return players;
+};
+
+
+function removeItemFromArray(item,array){
+  var idx = array.indexOf(item);
+  if(idx != -1) {
+    array.splice(idx, 1);
+  }
+}
 
 io.on('connection', function (socket) {
 
-      sockets.push(socket);
+      // sockets.push(socket);
    
-      socket.on('disconnect', function () {
-        
-          // socketLab.emit('removePlayer',socket.id);
-      
+      socket.on('connect_host', function () {      
+        socketsHosts.push(socket);
+        console.log(getPlayers());
+        io.sockets.emit('welcome_host',getPlayers());
       });
 
-      socket.on('send_player', function (data) {
-        
-          // socketLab.emit('removePlayer',socket.id);
-      		console.log(data);
+      socket.on('connect_player', function () {      
+        socketsPlayers.push(socket);
+        socket.__player = {};
+        socket.__player.id   = socket.id;
+        socket.__player.name = "Player n° " + (idPlay++);
+        io.sockets.emit('new_player',socket.__player);
+      });
+
+
+      socket.on('disconnect', function () {      
+        removeItemFromArray(socket,socketsHosts);
+        removeItemFromArray(socket,socketsPlayers);
+        // io.sockets.emit('disconnect_player',);
+      });
+
+
+      socket.on('send_player_name', function (name) {
+      	socket.__player.name = name;
+        io.sockets.emit('update_player',socket.__player);
+      });
+
+      socket.on('send_player_dir', function (data) {
+          
       });
       
       socket.on('lab', function (name) 

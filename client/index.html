@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bomber</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+    </head>
+    <body>
+        <h1>BomberMan</h1>
+        <canvas id="map-canvas" width="800" height="800"></canvas>
+        <table id='table-players'>
+            <thead>
+                <th>Joueur</th> 
+            </thead>
+            <tbody>
+                <tr v-for="player in players">
+                    <td>{{player.name}}</td>
+                </tr> 
+            </tbody>
+        </table>
+
+        <script type="text/javascript" src="js/vue.js"></script>
+        <script type="text/javascript" src="js/socket.io.js"></script>
+        <script type="text/javascript" src="js/constant.js"></script>
+        <script type="text/javascript" src="js/map.js"></script>
+        <script type="text/javascript" src="js/bombe.js"></script>
+        <script type="text/javascript" src="js/player.js"></script>
+        <script type="text/javascript" src="js/screen_host.js"></script>
+    </body>
+</html>

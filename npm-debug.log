@@ -1,19 +1,31 @@
 0 info it worked if it ends with ok
+<<<<<<< HEAD
 1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
 2 info using npm@4.0.2
 3 info using node@v6.9.1
+=======
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'start' ]
+2 info using npm@3.5.2
+3 info using node@v4.2.6
+>>>>>>> 1d50842857cf56bf9d879fe2a5077c86ff81c4cb
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle express-html@0.0.1~prestart: express-html@0.0.1
 6 silly lifecycle express-html@0.0.1~prestart: no script for prestart, continuing
 7 info lifecycle express-html@0.0.1~start: express-html@0.0.1
 8 verbose lifecycle express-html@0.0.1~start: unsafe-perm in lifecycle true
+<<<<<<< HEAD
 9 verbose lifecycle express-html@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/thomasgauzin/Desktop/Bomber/bomber/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 10 verbose lifecycle express-html@0.0.1~start: CWD: /Users/thomasgauzin/Desktop/Bomber/bomber
+=======
+9 verbose lifecycle express-html@0.0.1~start: PATH: /usr/share/npm/bin/node-gyp-bin:/home/epatrois/Bureau/bomber/node_modules/.bin:/home/epatrois/.rbenv/plugins/ruby-build/bin:/home/epatrois/.rbenv/shims:/home/epatrois/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle express-html@0.0.1~start: CWD: /home/epatrois/Bureau/bomber
+>>>>>>> 1d50842857cf56bf9d879fe2a5077c86ff81c4cb
 11 silly lifecycle express-html@0.0.1~start: Args: [ '-c', 'DEBUG=express:* node server.js' ]
 12 silly lifecycle express-html@0.0.1~start: Returned: code: 1  signal: null
 13 info lifecycle express-html@0.0.1~start: Failed to exec start script
 14 verbose stack Error: express-html@0.0.1 start: `DEBUG=express:* node server.js`
 14 verbose stack Exit status 1
+<<<<<<< HEAD
 14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:279:16)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at EventEmitter.emit (events.js:191:7)
@@ -28,6 +40,22 @@
 18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
 19 error node v6.9.1
 20 error npm  v4.0.2
+=======
+14 verbose stack     at EventEmitter.<anonymous> (/usr/share/npm/lib/utils/lifecycle.js:232:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/share/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:821:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+15 verbose pkgid express-html@0.0.1
+16 verbose cwd /home/epatrois/Bureau/bomber
+17 error Linux 4.4.0-93-generic
+18 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
+19 error node v4.2.6
+20 error npm  v3.5.2
+>>>>>>> 1d50842857cf56bf9d879fe2a5077c86ff81c4cb
 21 error code ELIFECYCLE
 22 error express-html@0.0.1 start: `DEBUG=express:* node server.js`
 22 error Exit status 1
