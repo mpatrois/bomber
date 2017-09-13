@@ -69,9 +69,10 @@
 
 .controler{
     display: inline-block;
-    position: relative;
-    width: 50%;
+    position: absolute;
+    top: 0;
     height: 300px;
+    width: 50%;
 }
 #control-a{
     width: 200px;
@@ -83,6 +84,12 @@
     line-height: 200px;
     color: white;
     font-family:"Bomberman";
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
 }
 #joystick-vertical{
     transform: rotate(90deg);
@@ -101,3 +108,23 @@
     right: 0px;
 }
 
+@media screen and (max-width: 600px){
+    #joystick{
+        display: block;
+        width: 300px;
+        transform: rotate(90deg);
+        margin: auto;
+        margin-bottom: 50px;
+    }
+    .controler{
+        display: block;
+        position: static;
+        width: 100%;
+    }
+    #control-a{
+        position: static;  
+        transform: rotate(90deg);
+
+
+    }
+}
