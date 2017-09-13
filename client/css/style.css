@@ -1,0 +1,110 @@
+@font-face{
+    font-family:"Bomberman";
+    src:url(fonts/Bomberman/bm.ttf);
+}
+
+body{
+    /*  background:url(../images/wp.png);
+    background-repeat: no-repeat;
+    background-size:auto;
+    background-position: center;
+    background-attachment: fixed; */
+    margin:0;
+    margin-top:30px;
+    margin-left:30px;
+    font-family:"Bomberman";
+    float:left;
+}
+body h1{
+    text-align: center;
+    margin-top:2em;
+}
+#form{
+    text-align: center;
+    padding:1em 0;
+    display:block;
+}
+
+div form input{
+    text-align: center;
+    width:15em;
+}
+div form h2{
+    text-align: center;
+    margin-top:0 auto;
+}
+
+#gamepad{
+    text-align: center;
+    line-height:80px;
+}
+.right, .left, .top, .down, .bomb{
+    min-width:80px;
+    max-width:80px;
+    background-color:black;
+    color:#e7729f;
+    margin:0 auto;
+}
+
+/*.down{
+width:0;
+height:0;
+border:0 solid transparent;
+border-left-width:50px;
+border-right-width:50px;
+border-top:50px solid black;
+}
+
+.top{
+width:0;
+height:0;
+border:0 solid transparent;
+border-left-width:50px;
+border-right-width:50px;
+border-bottom:50px solid black;
+}
+
+.right{
+width:0;
+height:0;
+border:0 solid transparent;
+border-top-width:50px;
+border-bottom-width:50px;
+border-left:50px solid black;
+}
+
+.left{
+width:0;
+height:0;
+border:0 solid transparent;
+border-top-width:50px;
+border-bottom-width:50px;
+border-bottom:50px solid black;
+}
+*/
+.bomb{
+    border-radius:50%;
+    background-color:white;
+    color:white;
+}
+#bomb_launch{
+    display:inline-block;
+    margin:0 auto;
+    text-align: center;
+    line-height:200px;
+    position:absolute;
+    right:50px;
+    top:18%;
+}
+
+.left, .right, .bomb{
+    display:inline-block;
+    margin:20px;
+}
+.bombL{
+    border-radius:50%;
+    background-color:black;
+    color:#e7729f;
+    min-width:200px;
+    font-size:2em;
+}

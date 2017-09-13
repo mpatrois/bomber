@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Penser à faire l'orientation portrait/landscape pour forcer la prise en main en mode manette -->
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <title>Bomber</title>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="gamepad">
+            <div class="top">HAUT</div>
+            <div class="left">GAUCHE</div>
+            <div class="bomb">.....</div>
+            <div class="right">DROITE</div>
+            <div class="down">BAS</div>
+        </div>
+        <div id="bomb_launch">
+            <div class="bombL">BOMBE</div>
+        </div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+        <script type="text/javascript">
+            var socket = io.connect();
+
+            var myPlayer = {
+                id:0,
+                name:"Thomas"
+            }
+
+            socket.on('connect', function () {
+                myPlayer.id = socket.id;
+                socket.emit("my_name",myPlayer);
+            });
+
+            console.log("test1");
+            document.onsubmit = function (event){
+                event.preventDefault();
+
+                var namePlayer = document.getElementById("name").value;
+                myPlayer.name = namePlayer;
+                //console.log("test2");
+                socket.emit("send_player",myPlayer);
+                return false;
+            }
+        </script>
+
+    </body>
+</html>
