@@ -11,7 +11,7 @@
 
         <div id="gamepad">
             <div id="joystick">
-                <div class="one-direction" id="joystick-hotizontal">
+                <div class="one-direction" id="joystick-horizontal">
                     <i id="btn-left" class="fa fa-caret-left" aria-hidden="true" onclick="move(2)"></i>
                     <i id="btn-right" class="fa fa-caret-right" aria-hidden="true" onclick="move(11)"></i>
                 </div>
@@ -19,10 +19,11 @@
                     <i id="btn-up" class="fa fa-caret-left" aria-hidden="true" onclick="move(3)"></i>
                     <i id="btn-down" class="fa fa-caret-right" aria-hidden="true" onclick="move(1)"></i>
                 </div>
-                
             </div>
-            <div id="control-a" class="control-button">A</div>
-            <div id="control-b" class="control-button">B</div>
+            <div class="controler">
+                <div id="control-a" class="control-button">A</div>
+                <div id="control-b" class="control-button">B</div>
+            </div>
         </div>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
