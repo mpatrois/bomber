@@ -98,11 +98,16 @@ function Game(){
         for (i=0; i < explosions.length; i++){
             explosions[i].draw(context);
         }
-        if((Date.now()-timeStampExplosion) > 200){
+
+        
+        if((Date.now()-timeStampExplosion) > 50){
             timeStampExplosion = Date.now();
             for (i=0; i < explosions.length; i++){
                 explosions[i].step++;
             } 
+            explosions = explosions.filter(function(expl){
+                return !(expl.step >= 6);
+            });
         }
     
         for (var i = 0; i < this.players.length; i++) {

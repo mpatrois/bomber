@@ -96,9 +96,9 @@ function Explosion(cx,cy){
     // this.caseX = cx;
     // this.caseY = cy;
     // this.size = Pacman.BLOCK_SIZE;
-    time = 3;
+    // time = 3;
 
-    this.step = 0;
+    this.step = 1;
     var img = document.getElementById("bombe-sprite");
     
     this.draw = function(ctx){
@@ -106,7 +106,7 @@ function Explosion(cx,cy){
         var posOnScreen = {x:cx* Pacman.BLOCK_SIZE, y: cy* Pacman.BLOCK_SIZE};
 
         // console.log(this.step);
-        ctx.drawImage(img,115+this.step*42,117,42,42,posOnScreen.x,posOnScreen.y,Pacman.BLOCK_SIZE,Pacman.BLOCK_SIZE);
+        ctx.drawImage(img,this.step*37,0,37,37,posOnScreen.x,posOnScreen.y,Pacman.BLOCK_SIZE,Pacman.BLOCK_SIZE);
     }
 
 
